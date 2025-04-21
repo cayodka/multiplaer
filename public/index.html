@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercicio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="boxLogin">
+        <h2>Login</h2>
+    <input id="username" placeholder="Nome"><br>
+    <input id="password" type="password" placeholder="Senha"><br>
+    <button onclick="login()">Entrar</button>
+
+    <h2>Cadastro</h2>
+    <input id="newUsername" placeholder="Novo nome"><br>
+    <input id="newPassword" type="password" placeholder="Senha"><br>
+    <select id="classe">
+        <option value="Mago">Mago</option>
+        <option value="Ranger">Ranger</option>
+        <option value="Guerreiro">Guerreiro</option>
+    </select><br>
+    <button onclick="register()">Cadastrar</button>
+    </div>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                alert("Por favor, preencha o nome de usuário e senha.");
+                return;
+            }
+
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.message === 'Login bem-sucedido') {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);
+                    localStorage.setItem('classe', data.classe);
+                    window.location.href = '/pagina1.html';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => alert('Erro ao tentar login: ' + error.message));
+        }
+
+        function register() {
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const classe = document.getElementById('classe').value;
+
+            if (!newUsername || !newPassword) {
+                alert("Por favor, preencha o nome de usuário e senha.");
+                return;
+            }
+
+            fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: newUsername, password: newPassword, classe })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => alert('Erro ao tentar registrar: ' + error.message));
+        }
+    </script>
+</body>
+</html>

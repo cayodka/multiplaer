@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercicio</title>
+    <style>
+        #game {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #333;
+        }
+        .player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game"></div> 
+
+    <h3>Jogadores Online:</h3>
+    <div id="online-list"></div> 
+    <input type="text" id="novoNome" placeholder="Novo nome">
+    <button onclick="alterarNome()">Alterar Nome</button>
+    <button onclick="excluirConta()">Excluir Conta</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "VT323", monospace;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHg3aXp5cjZ6MnU1Z3gzYzY1aThkZ2lwbjQ4d3RyNWZpOHkzYXQ0YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Byour3OgR0nWnRR6Tc/giphy.gif);
+    background-position: center;
+    background-size: contain;
+}
+
+#boxLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 35rem;
+    width: 25rem;
+    background-color: rgba(128, 128, 128, 0.733);
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+#boxLogin input{
+    background-color: rgba(240, 248, 255, 0.623);
+    height: 2rem;
+    width: 15rem;
+    border-radius: 5px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.699);
+}
+
+#boxLogin input:hover{
+    background-color: black;
+    color: whitesmoke;
+}
+
+#boxLogin button{
+    height: 5rem;
+    width: 5rem;
+    background-color: rgba(240, 248, 255, 0.623);
+}
+
+#boxLogin button:hover{
+    background-color: black;
+    color: whitesmoke;
+}
+
+#classe{
+    background-color: rgba(240, 248, 255, 0.623);
+    height: 2rem;
+    width: 15rem;
+    align-items: center;
+    font: 45px;
+}
+
+#classe:hover{
+    background-color: black;
+    color: whitesmoke;
+}
+
+#classe option:hover{
+    background-color: black;
+    color: whitesmoke;
+}
