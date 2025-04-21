@@ -1,1 +1,14 @@
-{"1":{"password":"1212","classe":"Mago"},"12":{"password":"1","classe":"Mago"},"cayo":{"password":"1212","classe":"Mago"}}
+{
+  "1": {
+    "password": "1212",
+    "classe": "Mago"
+  },
+  "cayo": {
+    "password": "1212",
+    "classe": "Mago"
+  },
+  "teste": {
+    "password": "12",
+    "classe": "Mago"
+  }
+}

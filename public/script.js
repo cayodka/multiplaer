@@ -4,7 +4,12 @@ const nome = localStorage.getItem('username');
 const senha = localStorage.getItem('password');
 const classe = localStorage.getItem('classe');
 
-socket.emit('newPlayer', { nome, classe });
+let socketId = null;
+
+socket.on('connect', () => {
+    socketId = socket.id; 
+    socket.emit('newPlayer', { nome, classe });
+});
 
 let x = 100, y = 100;
 const velocidade = 25;
@@ -18,13 +23,22 @@ document.addEventListener('keydown', (e) => {
 });
 
 socket.on('updatePlayers', (players) => {
+    const idsAtuais = Object.keys(players);
+    document.querySelectorAll('.player').forEach(div => {
+        if (!idsAtuais.includes(div.id)) {
+            div.remove();
+        }
+    });
+
     for (let id in players) {
         const p = players[id];
+
+        if (!p || !p.nome || !p.classe) continue;
+
         let playerDiv = document.getElementById(id);
-        
         if (!playerDiv) {
             playerDiv = document.createElement('div');
-            playerDiv.id = id; 
+            playerDiv.id = id;
             playerDiv.className = 'player';
             game.appendChild(playerDiv);
         }
@@ -36,9 +50,13 @@ socket.on('updatePlayers', (players) => {
     }
 
     const lista = document.getElementById('online-list');
-    const nomes = Object.values(players).map(p => `${p.nome}/${p.classe}`).sort();
+    const nomes = Object.values(players)
+        .filter(p => p && p.nome && p.classe)
+        .map(p => `${p.nome}/${p.classe}`)
+        .sort();
     lista.innerHTML = nomes.map(n => `<div>${n}</div>`).join('');
 });
+
 
 function alterarNome() {
     const novoNome = document.getElementById('novoNome').value.trim();
@@ -75,7 +93,8 @@ function excluirConta() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             username: nome,
-            password: senha
+            password: senha,
+            socketId: socketId 
         })
     })
     .then(res => res.json())
